@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vejeya Prasad C — AI & Data Science</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--surface:#12121a;--border:#1e1e2e;--text:#e4e4ed;--muted:#8888a0;--accent:#64d8a0;--accent2:#3ea8ff;--serif:'DM Serif Display',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:color .2s}a:hover{color:var(--accent2)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}section{padding:5rem 0}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:rgba(10,10,15,.7);border-bottom:1px solid var(--border);padding:1rem 0}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--serif);font-size:1.25rem;color:var(--text)}.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}.nav-links a{color:var(--muted);font-size:.85rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;transition:color .2s}.nav-links a:hover{color:var(--accent)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:5rem}
+.hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(100,216,160,.08),transparent 70%);top:-100px;right:-200px;pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1fr 300px;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-tag{display:inline-block;font-family:var(--mono);font-size:.75rem;color:var(--accent);border:1px solid rgba(100,216,160,.3);padding:.35rem .85rem;border-radius:999px;margin-bottom:1.5rem;letter-spacing:.04em}
+.hero h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);line-height:1.1;letter-spacing:-.03em;margin-bottom:1.25rem}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{color:var(--muted);font-size:1.05rem;max-width:520px;margin-bottom:2rem;line-height:1.7}
+.hero-links{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.5rem;border-radius:8px;font-size:.85rem;font-weight:600;transition:all .25s}
+.btn-primary{background:var(--accent);color:var(--bg)}.btn-primary:hover{background:#7ae6b4;color:var(--bg)}
+.btn-outline{border:1px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.hero-photo{position:relative}.hero-photo img{width:100%;border-radius:20px;object-fit:cover;aspect-ratio:3/4;filter:grayscale(.15)}
+.hero-photo::after{content:'';position:absolute;inset:-8px;border-radius:24px;border:1px solid rgba(100,216,160,.15);pointer-events:none}
+.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-num{font-family:var(--serif);font-size:2rem;color:var(--accent);line-height:1}.stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem}
+.section-tag{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);letter-spacing:-.02em;margin-bottom:1rem}
+.section-desc{color:var(--muted);max-width:600px;margin-bottom:3rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.about-text p{color:var(--muted);margin-bottom:1rem;line-height:1.8}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.skill-chip{font-family:var(--mono);font-size:.72rem;padding:.4rem .8rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all .3s;position:relative;overflow:hidden}
+.project-card:hover{border-color:rgba(100,216,160,.3);transform:translateY(-4px)}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .3s}.project-card:hover::before{opacity:1}
+.project-type{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.75rem}
+.project-title{font-family:var(--serif);font-size:1.3rem;margin-bottom:.75rem}.project-desc{color:var(--muted);font-size:.85rem;line-height:1.7;margin-bottom:1rem}
+.project-tech{display:flex;flex-wrap:wrap;gap:.4rem}.project-tech span{font-family:var(--mono);font-size:.65rem;padding:.25rem .6rem;border-radius:4px;background:rgba(100,216,160,.08);color:var(--accent);border:1px solid rgba(100,216,160,.12)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.edu-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.75rem}
+.edu-degree{font-weight:600;font-size:1rem;margin-bottom:.25rem}.edu-school{color:var(--accent);font-size:.9rem}.edu-meta{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:.5rem}
+.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.cert-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;transition:border-color .3s}.cert-item:hover{border-color:rgba(100,216,160,.25)}
+.cert-name{font-weight:600;font-size:.82rem;margin-bottom:.25rem}.cert-org{color:var(--muted);font-size:.72rem}
+.contact-inner{text-align:center;max-width:600px;margin:0 auto}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.contact-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.25rem;border-radius:999px;border:1px solid var(--border);font-size:.85rem;color:var(--text);transition:all .25s}.contact-pill:hover{border-color:var(--accent);color:var(--accent)}
+footer{border-top:1px solid var(--border);padding:2rem 0;text-align:center}footer p{font-size:.78rem;color:var(--muted)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>*{opacity:0;animation:fadeUp .8s ease forwards}.hero-inner>*:nth-child(2){animation-delay:.3s}
+@media(max-width:768px){
+.hero-inner{grid-template-columns:1fr;text-align:center}.hero-photo{max-width:260px;margin:0 auto;order:-1}
+.hero-sub{margin-left:auto;margin-right:auto}.hero-links,.hero-stats{justify-content:center}
+.about-grid,.edu-grid,.projects-grid,.cert-grid{grid-template-columns:1fr}
+.nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--border);padding:1.5rem 2rem;gap:1rem}
+.nav-links.active{display:flex}.nav-toggle{display:block}
+}
+</style>
+</head>
+<body>
+<nav><div class="container"><a href="#" class="nav-logo">V<span>.</span>P</a><button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button><ul class="nav-links"><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#education">Education</a></li><li><a href="#contact">Contact</a></li></ul></div></nav>
+
+<section class="hero" id="home"><div class="container"><div class="hero-inner"><div>
+<span class="hero-tag">AI & Data Science</span>
+<h1>Vejeya Prasad <em>C</em></h1>
+<p class="hero-sub">M.Tech AI & Data Science researcher specializing in deep learning architectures for medical image segmentation, audio forensics, and computer-aided diagnosis systems.</p>
+<div class="hero-links">
+<a href="https://github.com/VejeyVJ" target="_blank" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6.02 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+<a href="https://www.linkedin.com/in/vejeya-prasad-c-b018b7210/" target="_blank" class="btn btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+<a href="/cdn-cgi/l/email-protection#c5b3a0afa0bcf4f0f5fc85a2a8a4aca9eba6aaa8" class="btn btn-outline">✉ Email</a>
+</div>
+<div class="hero-stats">
+<div><div class="stat-num">3</div><div class="stat-label">DL Projects</div></div>
+<div><div class="stat-num">8.8</div><div class="stat-label">M.Tech CGPA</div></div>
+<div><div class="stat-num">1</div><div class="stat-label">Paper Submitted</div></div>
+</div>
+</div>
+<div class="hero-photo"><img src="photo.jpg" alt="Vejeya Prasad C"></div>
+</div></div></section>
+
+<section id="about"><div class="container">
+<div class="about-grid">
+<div>
+<div class="section-tag">About</div>
+<div class="section-title">Who I am</div>
+<div class="about-text">
+<p>I'm Vejeya Prasad, a postgraduate researcher from Tirunelveli, Tamil Nadu, completing my M.Tech in Artificial Intelligence & Data Science at SASTRA Deemed University, Thanjavur.</p>
+<p>I specialize in designing deep learning architectures for medical imaging, audio forensics, and computer-aided diagnosis. My thesis work involved independently building a multi-model ensemble pipeline from scratch — managing everything from data preprocessing and architecture design to training, evaluation, and clinical deployment prototyping. This taught me to break down complex problems systematically, adapt when initial approaches fail, and deliver results under tight deadlines and hardware constraints.</p>
+<p>I'm a self-driven learner who picks up new frameworks quickly — my deepfake audio detection project required me to move from computer vision into audio signal processing and build a novel architecture in a domain I had no prior experience in. I take ownership of my work, document it thoroughly, and care about writing code that others can understand and build upon.</p>
+<p>I work well in collaborative settings — during my internship, I coordinated with cross-functional teams to translate raw data into actionable business insights. I communicate technical ideas clearly, whether to peers, mentors, or non-technical stakeholders.</p>
+<p>I'm seeking roles in AI/ML Engineering, Data Science, or Data Analytics where I can contribute from day one while continuing to grow alongside experienced professionals.</p>
+</div>
+</div>
+<div>
+<div class="section-tag">Skills</div>
+<div class="section-title">Tech stack</div>
+<div class="skills-wrap">
+<span class="skill-chip">Python</span><span class="skill-chip">SQL</span>
+<span class="skill-chip">PyTorch</span><span class="skill-chip">TensorFlow</span><span class="skill-chip">Keras</span>
+<span class="skill-chip">Scikit-learn</span><span class="skill-chip">OpenCV</span>
+<span class="skill-chip">NumPy</span><span class="skill-chip">Pandas</span><span class="skill-chip">Matplotlib</span>
+<span class="skill-chip">torchaudio</span><span class="skill-chip">Gradio</span>
+<span class="skill-chip">Power BI</span>
+<span class="skill-chip">Image Segmentation</span><span class="skill-chip">Medical Imaging</span>
+<span class="skill-chip">Transfer Learning</span><span class="skill-chip">Attention Mechanisms</span>
+<span class="skill-chip">Ensemble Methods</span><span class="skill-chip">EDA</span>
+</div>
+</div>
+</div>
+</div></section>
+
+<section id="projects"><div class="container">
+<div class="section-tag">Projects</div>
+<div class="section-title">Research & development</div>
+<div class="section-desc">End-to-end deep learning systems — from architecture design and training to evaluation and deployment.</div>
+<div class="projects-grid">
+<div class="project-card" style="grid-column:1/-1">
+<div class="project-type">M.Tech Thesis</div>
+<div class="project-title">Topology-Guided 2.5D Ensemble Fusion for Kidney Tumor Segmentation</div>
+<p class="project-desc">Proposed a two-stage cascade architecture combining 3D kidney localization (nnU-Net) with an ensemble of three architecturally diverse 2.5D segmentation networks. Introduced SliceAttentionGate for adaptive inter-slice weighting, TumorAwareHead for explicit tumor encoding at the deepest representation level, and a topology-guided ensemble fusion strategy with evidential uncertainty calibration. Evaluated on the KiTS19 benchmark with 42 held-out validation cases. Paper co-authored with Ramya S.</p>
+<div class="project-tech"><span>PyTorch</span><span>nnU-Net</span><span>EfficientNet-B4</span><span>UNet++</span><span>ASPP</span><span>CBAM</span><span>EDL</span><span>KiTS19</span></div>
+</div>
+<div class="project-card">
+<div class="project-type">Audio Forensics</div>
+<div class="project-title">Deepfake Audio Detection — SB-FAC</div>
+<p class="project-desc">Designed a novel Sub-Band Frequency Attention Conformer architecture (~3.5M params) with sub-band decomposition across 4 frequency bands, parallel Conformer branches, and learned sigmoid-based frequency attention for interpretable spoofing detection. Deployed as a real-time Gradio web application with attention visualization.</p>
+<div class="project-tech"><span>PyTorch</span><span>torchaudio</span><span>Conformer</span><span>Gradio</span><span>ASVspoof 2019</span></div>
+</div>
+<div class="project-card">
+<div class="project-type">Medical Imaging</div>
+<div class="project-title">CLAHE-Enhanced GI Disease Detection</div>
+<p class="project-desc">Built an EfficientNetB0 + CBAM classification model with CLAHE preprocessing on LAB color space for 6-class endoscopic image classification. The contrast enhancement pipeline improved accuracy from 93.6% to 96.2% on Kvasir v2, with class-wise augmentation for handling pathological class imbalance.</p>
+<div class="project-tech"><span>TensorFlow/Keras</span><span>OpenCV</span><span>CBAM</span><span>CLAHE</span><span>Kvasir v2</span></div>
+</div>
+</div>
+</div></section>
+
+<section id="education"><div class="container">
+<div class="about-grid">
+<div>
+<div class="section-tag">Education</div>
+<div class="section-title">Academic journey</div>
+<div class="edu-grid" style="grid-template-columns:1fr">
+<div class="edu-card">
+<div class="edu-degree">Master of Technology — AI & Data Science</div>
+<div class="edu-school">SASTRA Deemed University, Thanjavur</div>
+<div class="edu-meta">2024 – Present • CGPA: 8.8</div>
+</div>
+<div class="edu-card">
+<div class="edu-degree">Bachelor of Technology — AI & Data Science</div>
+<div class="edu-school">B.S. Abdur Rahman Crescent Institute, Chennai</div>
+<div class="edu-meta">2020 – 2024 • CGPA: 8.3</div>
+</div>
+</div>
+</div>
+<div>
+<div class="section-tag">Certifications</div>
+<div class="section-title">Credentials</div>
+<div class="cert-grid" style="grid-template-columns:1fr">
+<div class="cert-item"><div class="cert-name">The Complete Python Bootcamp: Zero to Hero</div><div class="cert-org">Udemy • Feb 2025</div></div>
+<div class="cert-item"><div class="cert-name">The Complete SQL Bootcamp: Zero to Hero</div><div class="cert-org">Udemy • Jul 2023</div></div>
+</div>
+<div style="margin-top:2rem">
+<div class="section-tag">Experience</div>
+<div style="margin-top:1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.75rem">
+<div class="edu-degree">Business Analyst Intern</div>
+<div class="edu-school">Intrainz Edutech</div>
+<div class="edu-meta">Jul – Sep 2023</div>
+<p style="color:var(--muted);font-size:.85rem;margin-top:.5rem;line-height:1.7">Analyzed KPIs and business data trends. Collaborated with cross-functional teams to deliver data-driven recommendations and dashboards.</p>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+
+<section id="contact"><div class="container">
+<div class="contact-inner">
+<div class="section-tag">Contact</div>
+<div class="section-title">Let's connect</div>
+<p style="color:var(--muted);margin-bottom:1rem">Open to opportunities in AI/ML Engineering, Data Science, and Data Analytics.</p>
+<div class="contact-links">
+<a href="/cdn-cgi/l/email-protection#72041718170b4347424b32151f131b1e5c111d1f" class="contact-pill">✉ <span class="__cf_email__" data-cfemail="4e382b242b377f7b7e770e29232f2722602d2123">[email&#160;protected]</span></a>
+<a href="https://www.linkedin.com/in/vejeya-prasad-c-b018b7210/" target="_blank" class="contact-pill">▶ LinkedIn</a>
+<a href="https://github.com/VejeyVJ" target="_blank" class="contact-pill">◉ GitHub</a>
+<a href="tel:+917904622924" class="contact-pill">☎ +91 79046 22924</a>
+</div>
+</div>
+</div></section>
+
+<footer><div class="container"><p>© 2025 Vejeya Prasad C — Tirunelveli, Tamil Nadu, India</p></div></footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.style.opacity='1',e.target.style.transform=
